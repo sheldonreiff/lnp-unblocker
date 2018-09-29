@@ -1,0 +1,14 @@
+{
+  "name": "lnp-unblocker",
+  "version": "1.0.0",
+  "description": "Chrome extension for unblocking premium content on lancasteronline.com",
+  "main": "unblocker.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Sheldon Reiff",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

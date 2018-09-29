@@ -1,0 +1,28 @@
+{
+  "name": "LNP Unblocker",
+  "version": "1.0",
+  "description": "Unblocks premium content on lancasteronline.com",
+  "permissions": [
+  	"tabs",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://lancasteronline.com/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.slim.min.js",
+        "unblocker.js"
+      ]
+    }
+  ],
+  "browser_action": {},
+  "manifest_version": 2
+}
