@@ -4,11 +4,18 @@
   "description": "Chrome extension for unblocking premium content on lancasteronline.com",
   "main": "unblocker.js",
   "scripts": {
-    "test": "test"
+    "build": "yarn run gulp clean && yarn install --modules-folder ./build/node_modules --production --no-lockfile && yarn run gulp",
+    "deploy": "yarn run build && aws s3 sync dist/ s3://slr-dist"
   },
   "author": "Sheldon Reiff",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.3.1"
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "del": "^5.0.0",
+    "gulp": "^4.0.2",
+    "make-dir": "^3.0.0",
+    "zip-folder": "^1.0.0"
   }
 }
