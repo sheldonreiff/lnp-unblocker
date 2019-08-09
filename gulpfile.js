@@ -1,18 +1,18 @@
 const { src, dest, series } = require('gulp');
 const zipFolder = require('zip-folder');
 const del = require('del');
+const makeDir = require('make-dir');
+
+function clean(){
+    return del([
+        'dist/**',
+        'build/**',
+    ], { force:true })
+}
 
 function copySrc() {
     return src('./src/*')
-    .pipe(dest('./build/lnp-unblocker'));
-}
-
-function cleanDist(){
-    return del('dist/**', { force:true })
-}
-
-function cleanBuild(){
-    return del('build/**', { force:true })
+    .pipe(dest('./build'));
 }
 
 async function zipDist(cb){
@@ -25,7 +25,10 @@ async function zipDist(cb){
         }
     }
 
+    makeDir('./dist');
+
     return zipFolder('./build', './dist/lnp-unblocker.zip', error => zipCallback)
 }
 
-exports.default = series(cleanDist, cleanBuild, copySrc, zipDist);
+exports.clean = clean;
+exports.default = series(copySrc, zipDist);
