@@ -4,8 +4,10 @@
   "description": "Chrome extension for unblocking premium content on lancasteronline.com",
   "main": "unblocker.js",
   "scripts": {
-    "build": "yarn run gulp clean && yarn install --modules-folder ./build/node_modules --production --no-lockfile && yarn run gulp",
-    "deploy": "yarn run build && aws s3 sync dist/ s3://slr-dist"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "build": "yarn run lint && gulp clean && yarn install --modules-folder ./build/node_modules --production --no-lockfile && yarn run gulp",
+    "deploy": "build && aws s3 sync dist/ s3://slr-dist"
   },
   "author": "Sheldon Reiff",
   "license": "ISC",
@@ -14,6 +16,8 @@
   },
   "devDependencies": {
     "del": "^5.0.0",
+    "eslint": "^6.1.0",
+    "eslint-plugin-import": "^2.18.2",
     "gulp": "^4.0.2",
     "make-dir": "^3.0.0",
     "zip-folder": "^1.0.0"
