@@ -3,31 +3,29 @@ const zipFolder = require('zip-folder');
 const del = require('del');
 const makeDir = require('make-dir');
 
-function clean(){
-    return del([
-        'dist/**',
-        'build/**',
-    ], { force:true })
+const clean = () => {
+  return del([
+    'dist/**',
+    'build/**',
+  ], { force: true });
 }
 
-function copySrc() {
-    return src('./src/*')
+const copySrc = () => {
+  return src('./src/*')
     .pipe(dest('./build'));
 }
 
-async function zipDist(cb){
-
-    const zipCallback = error => {
-        if(!error){
-            cb();
-        }else{
-            console.log(error)
-        }
+const zipCallback = (error, cb) => {
+    if (!error) {
+        cb();
+    } else {
+        console.log(error);
     }
+};
 
-    makeDir('./dist');
-
-    return zipFolder('./build', './dist/lnp-unblocker.zip', error => zipCallback)
+const zipDist = (cb) => {
+  makeDir('./dist');
+  return zipFolder('./build', './dist/lnp-unblocker.zip', error => zipCallback(error, cb));
 }
 
 exports.clean = clean;
